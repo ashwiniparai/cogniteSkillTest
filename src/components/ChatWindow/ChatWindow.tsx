@@ -3,6 +3,7 @@ import {
     Box, Paper, TextField, IconButton, Typography, CircularProgress, Avatar
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import styles from './ChatWindow.module.scss';
 
 interface Message {
     text: string;
@@ -30,7 +31,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ user, messages, onSend }) => {
     };
 
     return (
-        <Box flexGrow={1} display="flex" flexDirection="column" sx={{ borderRadius: '20px', overflow: 'hidden', border: '1px solid #ccc', m: 1, height: '100%' }}>
+        <Box flexGrow={1} display="flex" flexDirection="column" className={styles.mainContainer}>
             <Box bgcolor="#e3f2fd" p={1} borderRadius={1} height={'3rem'} display={'flex'}>
                 <Avatar>{user[0]}</Avatar>
                 <Box pl={1}>
@@ -38,7 +39,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ user, messages, onSend }) => {
                     <Typography variant="caption" color="text.secondary">Last seen just now</Typography></Box>
             </Box>
             <Box sx={{ background: '#f7f7f7', height: '100%' }}>
-                <Box sx={{ flexGrow: 1, mb: 2, p: 2, overflowY: 'auto', borderRadius: 2, height: '34.5rem' }}>
+                <Box className={styles.chatContainer} p={2} display="flex" flexDirection="column" gap={1} overflow="auto" >
                     {
                         messages.map((msg, i) => (
                             <Box key={i} display="flex" justifyContent={msg.sender === 'me' ? 'flex-end' : 'flex-start'} mb={1} >
